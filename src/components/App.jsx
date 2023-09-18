@@ -1,7 +1,7 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { add, remove } from 'redux/phonebookSlice';
-import { update } from 'redux/filterSlice';
-import { getFilter, getContacts } from 'redux/selectors';
+import { useDispatch } from 'react-redux';
+//
+import { useGetContactsQuery } from 'redux/contacts';
+//
 
 import Section from 'components/Section';
 import Phonebook from 'components/Phonebook/';
@@ -9,14 +9,20 @@ import Contacts from 'components/Contacts';
 import Filter from 'components/Filter';
 
 export default function App() {
-  const contacts = useSelector(getContacts);
-  const filter = useSelector(getFilter);
+  //
+  const { data = [], isLoading } = useGetContactsQuery();
+
+  console.log(data);
+  //
+
+  const contacts = []
+  const filter = ''
 
   const dispatch = useDispatch();
 
   const onFilterChange = e => {
     const value = e.target.value;
-    dispatch(update(value));
+    // dispatch(update(value));
   };
 
   const onSubmitForm = ({ name, number }) => {
@@ -25,11 +31,11 @@ export default function App() {
       alert(`${name} is already exists`);
       return;
     }
-    dispatch(add(name, number));
+    // dispatch(add(name, number));
   };
 
   const onDeleteBtnClick = deleteId => {
-    dispatch(remove(deleteId));
+    // dispatch(remove(deleteId));
   };
 
   const filterContacts = () => {
@@ -46,7 +52,7 @@ export default function App() {
       <Section title="Contacts">
         <Filter filter={filter} onFilterChange={onFilterChange} />
         <Contacts
-          contacts={filterContacts()}
+          contacts={data}
           onButtonClick={onDeleteBtnClick}
         />
       </Section>
