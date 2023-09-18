@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 //
 import { useGetContactsQuery } from 'redux/contacts';
 //
@@ -10,7 +10,7 @@ import Filter from 'components/Filter';
 
 export default function App() {
   //
-  const { data = [], isLoading } = useGetContactsQuery();
+  const { data = [], } = useGetContactsQuery();
 
   console.log(data);
   //
@@ -18,10 +18,10 @@ export default function App() {
   const contacts = []
   const filter = ''
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const onFilterChange = e => {
-    const value = e.target.value;
+    // const value = e.target.value;
     // dispatch(update(value));
   };
 
@@ -38,11 +38,11 @@ export default function App() {
     // dispatch(remove(deleteId));
   };
 
-  const filterContacts = () => {
-    return contacts.filter(({ name }) =>
-      name.toLowerCase().includes(filter.toLowerCase())
-    );
-  };
+  // const filterContacts = () => {
+  //   return contacts.filter(({ name }) =>
+  //     name.toLowerCase().includes(filter.toLowerCase())
+  //   );
+  // };
 
   return (
     <>
