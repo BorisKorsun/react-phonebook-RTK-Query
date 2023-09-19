@@ -1,7 +1,9 @@
-// import { useDispatch } from 'react-redux';
-//
-import { useGetContactsQuery, useAddContactMutation, useDeleteContactMutation } from 'redux/contacts';
-//
+import { useState } from 'react';
+import {
+  useGetContactsQuery,
+  useAddContactMutation,
+  useDeleteContactMutation,
+} from 'redux/contacts';
 
 import Section from 'components/Section';
 import Phonebook from 'components/Phonebook/';
@@ -10,15 +12,15 @@ import Filter from 'components/Filter';
 
 export default function App() {
   //
+  const [filter, setFilter] = useState('');
+
   const { data: contacts = [] } = useGetContactsQuery();
   const [addContact] = useAddContactMutation();
   const [deleteContact] = useDeleteContactMutation();
   //
-  const filter = '';
 
   const onFilterChange = e => {
-    // const value = e.target.value;
-    // dispatch(update(value));
+    setFilter(e.target.value);
   };
 
   const onSubmitForm = ({ name, phone }) => {
@@ -30,8 +32,8 @@ export default function App() {
     const newContact = {
       name,
       phone,
-    }
-    addContact(newContact)
+    };
+    addContact(newContact);
   };
 
   const filterContacts = () => {
@@ -47,10 +49,7 @@ export default function App() {
       </Section>
       <Section title="Contacts">
         <Filter filter={filter} onFilterChange={onFilterChange} />
-        <Contacts
-          contacts={filterContacts()}
-          onButtonClick={deleteContact}
-        />
+        <Contacts contacts={filterContacts()} onButtonClick={deleteContact} />
       </Section>
     </>
   );
