@@ -1,6 +1,6 @@
 // import { useDispatch } from 'react-redux';
 //
-import { useGetContactsQuery, useAddContactMutation } from 'redux/contacts';
+import { useGetContactsQuery, useAddContactMutation, useDeleteContactMutation } from 'redux/contacts';
 //
 
 import Section from 'components/Section';
@@ -12,10 +12,9 @@ export default function App() {
   //
   const { data: contacts = [] } = useGetContactsQuery();
   const [addContact] = useAddContactMutation();
+  const [deleteContact] = useDeleteContactMutation();
   //
   const filter = '';
-
-  // const dispatch = useDispatch();
 
   const onFilterChange = e => {
     // const value = e.target.value;
@@ -35,10 +34,6 @@ export default function App() {
     addContact(newContact)
   };
 
-  const onDeleteBtnClick = deleteId => {
-    // dispatch(remove(deleteId));
-  };
-
   const filterContacts = () => {
     return contacts.filter(({ name }) =>
       name.toLowerCase().includes(filter.toLowerCase())
@@ -54,7 +49,7 @@ export default function App() {
         <Filter filter={filter} onFilterChange={onFilterChange} />
         <Contacts
           contacts={filterContacts()}
-          onButtonClick={onDeleteBtnClick}
+          onButtonClick={deleteContact}
         />
       </Section>
     </>
