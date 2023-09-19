@@ -10,12 +10,8 @@ import Filter from 'components/Filter';
 
 export default function App() {
   //
-  const { data = [], } = useGetContactsQuery();
-
-  console.log(data);
+  const { data: contacts = [], } = useGetContactsQuery();
   //
-
-  const contacts = []
   const filter = ''
 
   // const dispatch = useDispatch();
@@ -38,11 +34,11 @@ export default function App() {
     // dispatch(remove(deleteId));
   };
 
-  // const filterContacts = () => {
-  //   return contacts.filter(({ name }) =>
-  //     name.toLowerCase().includes(filter.toLowerCase())
-  //   );
-  // };
+  const filterContacts = () => {
+    return contacts.filter(({ name }) =>
+      name.toLowerCase().includes(filter.toLowerCase())
+    );
+  };
 
   return (
     <>
@@ -52,7 +48,7 @@ export default function App() {
       <Section title="Contacts">
         <Filter filter={filter} onFilterChange={onFilterChange} />
         <Contacts
-          contacts={data}
+          contacts={filterContacts()}
           onButtonClick={onDeleteBtnClick}
         />
       </Section>
