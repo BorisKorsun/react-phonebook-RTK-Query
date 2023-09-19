@@ -1,28 +1,28 @@
 import PropTypes from 'prop-types';
-import { Item, DeleteBtn } from './Contacts.styled';
+import ContactItem from './ContactItem';
 
-const Contacts = ({ contacts, onButtonClick }) => {
+
+
+export default function Contacts({ contacts }) {
+
+
   return (
     <>
       <ul>
         {contacts.map(({ name, id, phone }) => {
           return (
-            <Item key={id}>
-              <p>
-                {name}: {phone}
-              </p>
-              <DeleteBtn onClick={() => onButtonClick(id)} type="button">
-                Delete
-              </DeleteBtn>
-            </Item>
+            <ContactItem
+              key={id}
+              id={id}
+              name={name}
+              phone={phone}
+            />
           );
         })}
       </ul>
     </>
   );
-};
-
-export default Contacts;
+}
 
 Contacts.propType = {
   contacts: PropTypes.arrayOf(

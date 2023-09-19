@@ -2,7 +2,6 @@ import { useState } from 'react';
 import {
   useGetContactsQuery,
   useAddContactMutation,
-  useDeleteContactMutation,
 } from 'redux/contacts';
 
 import Section from 'components/Section';
@@ -11,13 +10,11 @@ import Contacts from 'components/Contacts';
 import Filter from 'components/Filter';
 
 export default function App() {
-  //
   const [filter, setFilter] = useState('');
 
   const { data: contacts = [] } = useGetContactsQuery();
   const [addContact] = useAddContactMutation();
-  const [deleteContact] = useDeleteContactMutation();
-  //
+
 
   const onFilterChange = e => {
     setFilter(e.target.value);
@@ -49,7 +46,7 @@ export default function App() {
       </Section>
       <Section title="Contacts">
         <Filter filter={filter} onFilterChange={onFilterChange} />
-        <Contacts contacts={filterContacts()} onButtonClick={deleteContact} />
+        <Contacts contacts={filterContacts()} />
       </Section>
     </>
   );
