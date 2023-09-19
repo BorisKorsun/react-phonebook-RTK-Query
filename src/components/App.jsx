@@ -1,6 +1,6 @@
 // import { useDispatch } from 'react-redux';
 //
-import { useGetContactsQuery } from 'redux/contacts';
+import { useGetContactsQuery, useAddContactMutation } from 'redux/contacts';
 //
 
 import Section from 'components/Section';
@@ -10,9 +10,10 @@ import Filter from 'components/Filter';
 
 export default function App() {
   //
-  const { data: contacts = [], } = useGetContactsQuery();
+  const { data: contacts = [] } = useGetContactsQuery();
+  const [addContact] = useAddContactMutation();
   //
-  const filter = ''
+  const filter = '';
 
   // const dispatch = useDispatch();
 
@@ -21,13 +22,17 @@ export default function App() {
     // dispatch(update(value));
   };
 
-  const onSubmitForm = ({ name, number }) => {
+  const onSubmitForm = ({ name, phone }) => {
     const isContact = contacts.find(contact => contact.name === name);
     if (isContact) {
       alert(`${name} is already exists`);
       return;
     }
-    // dispatch(add(name, number));
+    const newContact = {
+      name,
+      phone,
+    }
+    addContact(newContact)
   };
 
   const onDeleteBtnClick = deleteId => {
