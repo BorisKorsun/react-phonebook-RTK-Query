@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import ContactItem from './ContactItem';
+import ContactsListItem from './ContactsListItem';
 
 
 
@@ -11,7 +11,7 @@ export default function Contacts({ contacts }) {
       <ul>
         {contacts.map(({ name, id, phone }) => {
           return (
-            <ContactItem
+            <ContactsListItem
               key={id}
               id={id}
               name={name}

@@ -1,7 +1,7 @@
 import { DeleteBtn, Item } from './Contacts.styled';
 import { useDeleteContactMutation } from 'redux/contacts';
 
-export default function ContactItem({ id, name, phone }) {
+export default function ContactsListItem({ id, name, phone }) {
   const [deleteContact, { isLoading: isDeleting }] = useDeleteContactMutation();
   return (
     <Item>
