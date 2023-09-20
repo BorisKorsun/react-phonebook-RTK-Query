@@ -1,5 +1,6 @@
 import { DeleteBtn, Item } from './Contacts.styled';
 import { useDeleteContactMutation } from 'redux/contacts';
+import {  toast } from 'react-toastify';
 
 export default function ContactsListItem({ id, name, phone }) {
   const [deleteContact, { isLoading: isDeleting }] = useDeleteContactMutation();
@@ -9,7 +10,7 @@ export default function ContactsListItem({ id, name, phone }) {
         {name}: {phone}
       </p>
       <DeleteBtn
-        onClick={() => deleteContact(id)}
+        onClick={() => {deleteContact(id);toast.success('Contact was deleted succesfully')}}
         disabled={isDeleting}
         type="button"
       >

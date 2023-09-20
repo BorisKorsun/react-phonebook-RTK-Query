@@ -1,8 +1,7 @@
 import { useState } from 'react';
-import {
-  useGetContactsQuery,
-  useAddContactMutation,
-} from 'redux/contacts';
+import { useGetContactsQuery, useAddContactMutation } from 'redux/contacts';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import Section from 'components/Section';
 import Phonebook from 'components/Phonebook/';
@@ -14,7 +13,6 @@ export default function App() {
 
   const { data: contacts = [] } = useGetContactsQuery();
   const [addContact] = useAddContactMutation();
-
 
   const onFilterChange = e => {
     setFilter(e.target.value);
@@ -31,6 +29,7 @@ export default function App() {
       phone,
     };
     addContact(newContact);
+    toast.success('New contact was added succesfully');
   };
 
   const filterContacts = () => {
@@ -41,6 +40,7 @@ export default function App() {
 
   return (
     <>
+      <ToastContainer />
       <Section title="Phonebook">
         <Phonebook onSubmit={onSubmitForm} />
       </Section>
