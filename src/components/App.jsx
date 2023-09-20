@@ -18,18 +18,22 @@ export default function App() {
     setFilter(e.target.value);
   };
 
-  const onSubmitForm = ({ name, phone }) => {
+  const onSubmitForm = async ({ name, phone }) => {
     const isContact = contacts.find(contact => contact.name === name);
     if (isContact) {
-      alert(`${name} is already exists`);
+      toast.error(`${name} is already exists`);
       return;
     }
     const newContact = {
       name,
       phone,
     };
-    addContact(newContact);
-    toast.success('New contact was added succesfully');
+    try {
+      await addContact(newContact);
+      toast.success('New contact was added succesfully');
+    } catch (e) {
+      toast.error(e.message);
+    }
   };
 
   const filterContacts = () => {

@@ -4,13 +4,21 @@ import {  toast } from 'react-toastify';
 
 export default function ContactsListItem({ id, name, phone }) {
   const [deleteContact, { isLoading: isDeleting }] = useDeleteContactMutation();
+  const handleDeleteContact = async (id) => {
+    try {
+      await deleteContact(id)
+      toast.success('Contact was deleted succesfully')
+    } catch(e) {
+      toast.error(e.message)
+    }
+  }
   return (
     <Item>
       <p>
         {name}: {phone}
       </p>
       <DeleteBtn
-        onClick={() => {deleteContact(id);toast.success('Contact was deleted succesfully')}}
+        onClick={() => handleDeleteContact(null)}
         disabled={isDeleting}
         type="button"
       >
