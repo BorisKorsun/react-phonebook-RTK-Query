@@ -1,11 +1,7 @@
 import PropTypes from 'prop-types';
 import ContactsListItem from './ContactsListItem';
 
-
-
 export default function Contacts({ contacts }) {
-
-
   return (
     <>
       <ul>
